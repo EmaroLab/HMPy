@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creator class! &mdash; HMPy 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="HMPy 1 documentation" href="index.html" />
+    <link rel="next" title="GestureModel class!" href="GestureModel.html" />
+    <link rel="prev" title="Classifier class!" href="Classifier.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Creator">
+<span id="creator-class"></span><h1>Creator class!<a class="headerlink" href="#module-Creator" title="Permalink to this headline">¶</a></h1>
+<p>&#64;See preprocessed data</p>
+<dl class="class">
+<dt id="Creator.Creator">
+<em class="property">class </em><code class="descclassname">Creator.</code><code class="descname">Creator</code><a class="reference internal" href="_modules/Creator.html#Creator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator" title="Permalink to this definition">¶</a></dt>
+<dd><p>GenerateModel assumes the trials provided to be the
+modelling dataset of a Human Motion Primitive (HMP) and returns the model
+of the HMP computed by executing Gaussian Mixture Modelling (GMM) and
+Gaussian Mixture Regression (GMR) over the modelling dataset. The
+model is defined by the expected curve and associated set of covariance
+matrices of the features extracted from the trials.</p>
+<p>Actually considered features are:
+- 4D gravity (time, gravity components on the 3 axes)
+- 4D body acceleration (time, body acc. components on the 3 axes)</p>
+<dl class="method">
+<dt id="Creator.Creator.CreateDatasets_Acc">
+<code class="descname">CreateDatasets_Acc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.CreateDatasets_Acc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.CreateDatasets_Acc" title="Permalink to this definition">¶</a></dt>
+<dd><p>CreateDatasets computes the gravity and body acceleration components of the trials given in the [dataset]s by calling the function GetComponents for each trial and reshapes the results into one set of gravity components and one set of body acceleration components according to the requirements of Gaussian Mixture Modelling.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.GetComponents">
+<code class="descname">GetComponents</code><span class="sig-paren">(</span><em>x_axis</em>, <em>y_axis</em>, <em>z_axis</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.GetComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.GetComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>GetComponents discriminates between gravity and body acceleration by
+applying an infinite impulse response (IIR) filter to the raw
+acceleration data (one trial) given in input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x_axis</strong> &#8211; acceleration data in the axis x</li>
+<li><strong>y_axis</strong> &#8211; acceleration data in the axis y</li>
+<li><strong>z_axis</strong> &#8211; acceleration data in the axis z</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return gravity:</th><td class="field-body"><p class="first">gravity component of the acceleration data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return body:</th><td class="field-body"><p class="first last">body component of the acceleration data</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.GetExpected">
+<code class="descname">GetExpected</code><span class="sig-paren">(</span><em>set_</em>, <em>K</em>, <em>numGMRPoints</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.GetExpected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.GetExpected" title="Permalink to this definition">¶</a></dt>
+<dd><p>GetExpected performs Gaussian Mixture Modeling (GMM) and Gaussian Mixture
+Regression (GMR) over the given dataset. It returns the expected curve
+(expected mean for each point, computed over the values given in the
+[set]) and associated set of covariance matrices defining the &#8220;model&#8221;
+of the given dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>set</strong> &#8211; either the gravity or the body acc. dataset retrived from CreateDatasets</li>
+<li><strong>K</strong> &#8211; optimal number of clusters to be used to cluster the data of the given dataset retrieved from TuneK</li>
+<li><strong>numGMRPoints</strong> &#8211; number of data points composing the expected curves to be computed by GMR</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return expData:</th><td class="field-body"><p class="first">expected curve obtained by modelling the given dataset with the GMM+GMR procedure</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Return expSigma:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">associated covariance matrices obtained by modelling the given dataset with the GMM+GMR procedure</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.ObtainNumberOfCluster">
+<code class="descname">ObtainNumberOfCluster</code><span class="sig-paren">(</span><em>acc=True</em>, <em>gyro=False</em>, <em>algorithm='KMeans'</em>, <em>save=True</em>, <em>path=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.ObtainNumberOfCluster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.ObtainNumberOfCluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the expected curve for each dataset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>acc</strong> &#8211; bool parameter that indicates if the accelerometer data will be used</li>
+<li><strong>gyro</strong> &#8211; bool parameter that indicates if the gyroscope data will be used</li>
+<li><strong>algorithm</strong> &#8211; algorithm used to obtain the number of clusters</li>
+<li><strong>save</strong> &#8211; bool parameter that indicates if the plots are saved</li>
+<li><strong>path</strong> &#8211; path where the plots will be saved</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.ReadFiles">
+<code class="descname">ReadFiles</code><span class="sig-paren">(</span><em>names_acc</em>, <em>names_gyro</em>, <em>acc=True</em>, <em>gyro=False</em>, <em>dfilter='median'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.ReadFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.ReadFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the data from a list of files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>names_acc</strong> &#8211; list of files that contains the accelerometer data to be used as modelling dataset for a HMP</li>
+<li><strong>names_gyro</strong> &#8211; list of files that contains the gyroscope data to be used as modelling dataset for a HMP</li>
+<li><strong>acc</strong> &#8211; bool parameter that indicates if the accelerometer data will be used</li>
+<li><strong>gyro</strong> &#8211; bool parameter that indicates if the gyroscope data will be used</li>
+<li><strong>dfilter</strong> &#8211; type of filter used to reduce noise in the data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.RetrieveModel">
+<code class="descname">RetrieveModel</code><span class="sig-paren">(</span><em>K</em>, <em>priors</em>, <em>mu</em>, <em>sigma</em>, <em>points</em>, <em>in_</em>, <em>out</em>, <em>numVar</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.RetrieveModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.RetrieveModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs Gaussian Mixture Regression (GMR) over the GM model defined by its parameters. By providing temporal values as inputs, it returns a smooth generalized version of the data encoded in the GMM and the associated constraints expressed by the covariance matrices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>K</strong> &#8211; number of clusters</li>
+<li><strong>priors</strong> &#8211; apriori probavbility</li>
+<li><strong>mu</strong> &#8211; mean</li>
+<li><strong>sigma</strong> &#8211; covariance</li>
+<li><strong>points</strong> &#8211; input data (starting points to be used for GMR)</li>
+<li><strong>in</strong> &#8211; input dimension</li>
+<li><strong>out</strong> &#8211; output dimension</li>
+<li><strong>numVar</strong> &#8211; axis number, ex: if we use x,y,z then this parameters must be = 3</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return expMeans:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first">set of expected means for the given GM model</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Return expSigma:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">covariance matrices of the expected points in expMeans</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.TuneK">
+<code class="descname">TuneK</code><span class="sig-paren">(</span><em>set_</em>, <em>maxK</em>, <em>name</em>, <em>save=True</em>, <em>path=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.TuneK"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.TuneK" title="Permalink to this definition">¶</a></dt>
+<dd><p>TuneK determines the optimal number of clusters to be used to cluster
+the given [set] with K-means algorithm. It cycles from K = 2 to [maxK].
+The optimization criterion adopted is a variant of the elbow method: at
+each iteration TuneK computes the silhouette values of the clusters
+determined by the K-means algorithm and compares them with the values
+obtained at the previous iteration. When the quality of the
+clustering falls below a fixed threshold, TuneK stops.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>set</strong> &#8211; either the gravity or the body acc. dataset retrived from
+CreateDatasets</li>
+<li><strong>maxK</strong> &#8211; maximum number of clusters to be used to cluster the given
+dataset.</li>
+<li><strong>name</strong> &#8211; component name (gravity or body)</li>
+<li><strong>save</strong> &#8211; bool parameter that indicates if the plots are saved</li>
+<li><strong>path</strong> &#8211; path where the plots will be saved</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Koptimal:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">optimal number of clusters to be used to cluster the data
+of the given dataset</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.bench_k_means">
+<code class="descname">bench_k_means</code><span class="sig-paren">(</span><em>data</em>, <em>name</em>, <em>save=True</em>, <em>path=''</em>, <em>plot=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.bench_k_means"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.bench_k_means" title="Permalink to this definition">¶</a></dt>
+<dd><p>Silhouette analysis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> &#8211; dataset trasposed</li>
+<li><strong>name</strong> &#8211; component name (gravity or body)</li>
+<li><strong>save</strong> &#8211; bool parameter that indicates if the plots are saved</li>
+<li><strong>path</strong> &#8211; path where the plots will be saved</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return Koptimal:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">optimal number of clusters to be used to cluster the data of the given dataset</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Creator.Creator.runGMM">
+<code class="descname">runGMM</code><span class="sig-paren">(</span><em>dataset</em>, <em>K</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Creator.html#Creator.runGMM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Creator.Creator.runGMM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute GMM in a data set given a K number of clusters
+:param dataset: either the gravity or the body acc. dataset retrived from CreateDatasets
+:param K: number of clusters
+:return priors: apriori probavbility
+:return mu: mean
+:return sigma: covariance</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Classifier.html" title="previous chapter">Classifier class!</a></li>
+      <li>Next: <a href="GestureModel.html" title="next chapter">GestureModel class!</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Creator.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Luis Enrique Coronado Zuñiga.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/Creator.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>HMPy</name>  <!-- Change by the name of your package  -->
+  <version>0.0.1</version>
+  <description>
+  ROS package for client-server comunication using sockets for human gestures recognition
+  </description> <!-- Change the autor data  -->
+  <maintainer email="enriquecoronadozu@gmail.com">
+    EMARO+ ,University of Genoa
+  </maintainer>
+    <license>BSD</license>
+  <url type="repository">
+  https://github.com/enriquecoronadozu/hmpy.git
+  </url>
+  <author>Luis Enrique Coronado </author>
+  <!-- The *_depend tags are used to specify dependencies -->
+  <!-- Dependencies can be catkin packages or system dependencies -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>roscpp</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>roscpp</run_depend>
+
+</package>

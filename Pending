@@ -1,0 +1,11 @@
+-- Change extension of README.md to .rst, as http://docutils.sourceforge.net/docs/user/rst/quickstart.html,
+see tutorial: Distribuyendo tus aplicaciones Python en PyPI of Eugenia Bahit
+-- Revisar MANIFEST.in y setpu.py solo que esten bien
+-- Cambiar URL de la app
+-- Cambiar classifiers en setup.py a los que son
+-- Mejorar y explcar los ejemplos
+-- Importar solo lo que usa
+-- Funciones Euler Z-Y-Z
+-- eulerZYZ en matrix2euler solo tener 1. quitar la del toolbox si es necesario
+-- SUPER PENDIENTE: fixed2matriz agregar a __init__.py
+-- SUPER PENDIENTE: agrgar XYZ formulas

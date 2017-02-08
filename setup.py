@@ -1,11 +1,23 @@
 from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
 
-d = generate_distutils_setup(
-    packages=['wearami_sockets'],
-    package_dir={'': 'src'}
+setup(
+    name='hubpy',
+    version='0.3',
+    author='Enrique Coronado',
+    author_email='enriquecoronadozu@gmail.com',
+    url='https://github.com/EmaroLab/HMPy',
+    description='Python library for the modelling and recognition of Human Motion Primitives',
+    long_description=open('README.txt').read(),
+    packages=["gesture"],
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 2 :: Only",
+        "Topic :: Software Development"
+    ]
 )
-
-setup(**d)
-
-

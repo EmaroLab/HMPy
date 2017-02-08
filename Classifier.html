@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Classifier class! &mdash; HMPy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="HMPy 0.1 documentation" href="index.html" />
+    <link rel="next" title="Creator class!" href="Creator.html" />
+    <link rel="prev" title="Welcome to HMPy’s documentation!" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Classifier">
+<span id="classifier-class"></span><h1>Classifier class!<a class="headerlink" href="#module-Classifier" title="Permalink to this headline">¶</a></h1>
+<p>&#64;See preprocessed data</p>
+<dl class="class">
+<dt id="Classifier.Classifier">
+<em class="property">class </em><code class="descclassname">Classifier.</code><code class="descname">Classifier</code><a class="headerlink" href="#Classifier.Classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class used to classify a gesture</p>
+<dl class="method">
+<dt id="Classifier.Classifier.analyzeActualWindow">
+<code class="descname">analyzeActualWindow</code><span class="sig-paren">(</span><em>window</em>, <em>numSamples</em>, <em>delay=0</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.analyzeActualWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>AnalyzeActualWindow separates the gravity and body acceleration features
+contained in the window of real-time acceleration data, by first reducing
+the noise on the raw data with a median filter and then discriminating
+between the features with a low-pass IIR filter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>window</strong> &#8211; windows to be processed and analalized</li>
+<li><strong>numSamples</strong> &#8211; is equal to the windows size</li>
+<li><strong>delay</strong> &#8211; delay of samples</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.analyzeActualWindow_f">
+<code class="descname">analyzeActualWindow_f</code><span class="sig-paren">(</span><em>window</em>, <em>numSamples</em>, <em>delay=0</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.analyzeActualWindow_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>AnalyzeActualWindow separates the gravity and body acceleration features
+contained in the window of real-time acceleration data, by first reducing
+the noise on the raw data with a median filter and then discriminating
+between the features with a low-pass IIR filter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>window</strong> &#8211; windows to be processed and analalized</li>
+<li><strong>numSamples</strong> &#8211; is equal to the windows size</li>
+<li><strong>delay</strong> &#8211; delay of samples</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.calculateW">
+<code class="descname">calculateW</code><span class="sig-paren">(</span><em>sfiles</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.calculateW" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function can be used to obtain a better value of the weights</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sfiles</strong> &#8211; list of files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Model model:</th><td class="field-body">model to be used</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.classify">
+<code class="descname">classify</code><span class="sig-paren">(</span><em>model</em>, <em>dtype</em>, <em>feature_extraction</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.classify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the model to classify
+:param model: a instance of a GestureModel class
+:param save: bool parameter that indicates if the plots are saved
+:param path: path where the plots will be saved</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.compareComponent">
+<code class="descname">compareComponent</code><span class="sig-paren">(</span><em>model</em>, <em>string_component</em>, <em>component</em>, <em>window_size</em>, <em>distance_type='mh'</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.compareComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance from the model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> &#8211; model to be compared</li>
+<li><strong>string_component</strong> &#8211; string that indicate the component to be comparated (gravity or body)</li>
+<li><strong>window_size</strong> &#8211; size of a windows to be compared</li>
+<li><strong>distanc_type</strong> &#8211; metrics of the distance, by defual is the Mahalanobis distance &#8220;mh&#8221;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.compareModel">
+<code class="descname">compareModel</code><span class="sig-paren">(</span><em>model</em>, <em>acc</em>, <em>window_size</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.compareModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare model with a window of data sensory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> &#8211; model to be compared</li>
+<li><strong>acc</strong> &#8211; acceleration component of the window</li>
+<li><strong>window_size</strong> &#8211; integer that indicate the size of the window</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.compareModel_f">
+<code class="descname">compareModel_f</code><span class="sig-paren">(</span><em>model</em>, <em>gravity</em>, <em>body</em>, <em>window_size</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.compareModel_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare model with a window of data sensory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> &#8211; model to be compared</li>
+<li><strong>gravity</strong> &#8211; gravity component of the window</li>
+<li><strong>body</strong> &#8211; body component of the window</li>
+<li><strong>window_size</strong> &#8211; integer that indicate the size of the window</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.createWindow">
+<code class="descname">createWindow</code><span class="sig-paren">(</span><em>one_sample</em>, <em>window</em>, <em>window_size</em>, <em>numWritten</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.createWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function creates a windows used to compare with the models</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>one_sample</strong> &#8211; vector of sensory data in time t</li>
+<li><strong>windows</strong> &#8211; old windows</li>
+<li><strong>windows_size</strong> &#8211; size that can have the windows</li>
+<li><strong>numWritten</strong> &#8211; count used to itearte betweem samples</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.online_validation">
+<code class="descname">online_validation</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.online_validation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used for online classification from a sample of sensory data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; x value</li>
+<li><strong>y</strong> &#8211; y value</li>
+<li><strong>z</strong> &#8211; z value</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Classifier.Classifier.validate_from_file">
+<code class="descname">validate_from_file</code><span class="sig-paren">(</span><em>sfile</em>, <em>delim=' '</em><span class="sig-paren">)</span><a class="headerlink" href="#Classifier.Classifier.validate_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns a probability vector given a .txt file with data information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sfile</strong> &#8211; path and name of the file to be validated</li>
+<li><strong>delim</strong> &#8211; delimiter of the data in the txt file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return possibilities_vector:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">vector of possibilities which can be used for recognize a gesture</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to HMPy&#8217;s documentation!</a></li>
+      <li>Next: <a href="Creator.html" title="next chapter">Creator class!</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Classifier.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Enrique Coronado.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/Classifier.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
